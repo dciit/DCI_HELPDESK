@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createContext } from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import {
@@ -9,7 +9,13 @@ import Login from './pages/login.tsx';
 import Workorder from './pages/workorder.tsx';
 import Sparepart from './pages/sparepart.tsx';
 import NotFound from './pages/notfound.tsx';
+import { MContext } from './interface.ts';
 const BASE = import.meta.env.VITE_PATH;
+
+const ThemeContext = createContext<MContext>({});
+const context: MContext = {
+  appname: 'IT HELPDESK'
+}
 const router = createBrowserRouter([
   {
     path: `/${BASE}/`,
@@ -35,6 +41,8 @@ const router = createBrowserRouter([
 ]);
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ThemeContext.Provider value={context}>
+      <RouterProvider router={router} />
+    </ThemeContext.Provider>
   </React.StrictMode>,
 )
