@@ -1,6 +1,6 @@
 function Workorder() {
     return (
-        <div>Workorder</div>
+        <div>Workorder edit</div>
     )
 }
 
