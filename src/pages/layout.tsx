@@ -4,7 +4,7 @@ import Toolbar from '@/components/toolbar';
 import { Outlet } from 'react-router-dom';
 
 function Layout() {
-    const [login] = useState<boolean>(true);
+    const [login, setLogin] = useState<boolean>(true);
     return (
         login ?  <div className=' h-[95%]'>
             <Toolbar />
