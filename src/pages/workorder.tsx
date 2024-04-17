@@ -13,7 +13,7 @@ import { Input } from '@/components/ui/input';
 import { ThemeContext } from '@/main';
 import Loading from '@/components/loading';
 export default function Workorder() {
-    const appname = import.meta.env.VITE_APPNAME;
+    // const appname = import.meta.env.VITE_APPNAME;
     const context = useContext(ThemeContext);
     const theme = context.themelight;
     const mapStep = 3;
