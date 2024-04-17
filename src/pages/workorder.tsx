@@ -18,7 +18,7 @@ export default function Workorder() {
     const theme = context.themelight;
     const mapStep = 3;
     const [result, setResult] = useState<MResultWorkorder>({});
-    const [locations, setLocations] = useState<MLocation[]>([
+    const [locations] = useState<MLocation[]>([
         { dictId: '0', text: 'ออฟฟิศชั้น 2' },
         { dictId: '1', text: 'Main L7' },
         { dictId: '2', text: 'MECHA L7' },
