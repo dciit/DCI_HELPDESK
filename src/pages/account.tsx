@@ -25,7 +25,7 @@ export default function account() {
             { text: 'ALPHA SYSTEM', active: true },
             { text: 'On-line Request Forms', active: false },
             { text: 'WMS (FG Warehouse)', active: false },
-            { text: 'DCI-ALPHA WEB', active: false },
+            // { text: 'DCI-ALPHA WEB', active: false },
             //{ text: 'Andon Board', active: false },
             // { text: 'Backflush System', active: false },
             // { text: 'Scrap Management System', active: false },
