@@ -75,6 +75,7 @@ function Sparepart() {
         }
     }
 
+<<<<<<< HEAD
     return (
         <>
             <div className="bg-auto bg-no-repeat bg-center">
@@ -99,6 +100,35 @@ function Sparepart() {
                         เบิกอุปกรณ์ IT
                     </Typography>
                 </Paper>
+=======
+  return (
+    <>
+      <div className="bg-auto bg-no-repeat bg-center">
+        {/* <Box sx={{ maxWidth: 500, flexGrow: 1 }}> */}
+        <Paper
+          square
+          elevation={0}
+          sx={{
+            textAlign: "center",
+            fontSize: "h6.fontSize",
+            fontFamily: "Monospace",
+          }}
+        >
+          <h2>เบิกอุปกรณ์ IT</h2>
+          <Typography
+            sx={{
+              textAlign: "left",
+              fontSize: "h4.fontSize",
+              fontFamily: "Times New Roman",
+              // background: "#1976d2",
+              color: "#1976d2",
+              m: 3,
+            }}
+          >
+            เลือกอุปกรณ์ IT
+          </Typography>
+        </Paper>
+>>>>>>> sparepart
 
                 <div>{getGreeting(activeStep)}</div>
 
