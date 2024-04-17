@@ -88,15 +88,18 @@ function Sparepart() {
             fontFamily: "Monospace",
           }}
         >
+          <h2>เบิกอุปกรณ์ IT</h2>
           <Typography
             sx={{
-              textAlign: "center",
-              fontSize: "h5.fontSize",
-              background: "#1976d2",
-              color: "white",
+              textAlign: "left",
+              fontSize: "h4.fontSize",
+              fontFamily: "Times New Roman",
+              // background: "#1976d2",
+              color: "#1976d2",
+              m: 3,
             }}
           >
-            เบิกอุปกรณ์ IT
+            เลือกอุปกรณ์ IT
           </Typography>
         </Paper>
 
