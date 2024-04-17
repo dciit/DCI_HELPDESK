@@ -13,7 +13,6 @@ function Sparepart() {
     const theme = useTheme();
     const [activeStep, setActiveStep] = React.useState(0);
     const maxSteps = 3;
-
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         console.log(activeStep);
@@ -75,32 +74,6 @@ function Sparepart() {
         }
     }
 
-<<<<<<< HEAD
-    return (
-        <>
-            <div className="bg-auto bg-no-repeat bg-center">
-                {/* <Box sx={{ maxWidth: 500, flexGrow: 1 }}> */}
-                <Paper
-                    square
-                    elevation={0}
-                    sx={{
-                        textAlign: "center",
-                        fontSize: "h6.fontSize",
-                        fontFamily: "Monospace",
-                    }}
-                >
-                    <Typography
-                        sx={{
-                            textAlign: "center",
-                            fontSize: "h5.fontSize",
-                            background: "#1976d2",
-                            color: "white",
-                        }}
-                    >
-                        เบิกอุปกรณ์ IT
-                    </Typography>
-                </Paper>
-=======
   return (
     <>
       <div className="bg-auto bg-no-repeat bg-center">
@@ -128,7 +101,6 @@ function Sparepart() {
             เลือกอุปกรณ์ IT
           </Typography>
         </Paper>
->>>>>>> sparepart
 
                 <div>{getGreeting(activeStep)}</div>
 
