@@ -4,6 +4,12 @@ export interface MContext {
     workorder?: MResultWorkorder;
     result?: MResultWorkorder;
     setResult?: any;
+    themelight?: MTheme;
+}
+export interface MTheme {
+    bgColor?: string;
+    textContentColor?: string;
+    textTitleColor?: string;
 }
 export interface MWorkorderList {
     label: string;

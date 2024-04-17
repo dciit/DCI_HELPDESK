@@ -16,12 +16,10 @@ function Sparepart() {
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        console.log(activeStep);
     };
 
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
-        console.log(activeStep);
     };
 
     function getGreeting(_step: number) {
