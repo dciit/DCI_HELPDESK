@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext } from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import {
@@ -14,27 +14,32 @@ import Sparepart from './pages/sparepart.tsx';
 import NotFound from './pages/notfound.tsx';
 import Layout from './pages/layout.tsx';
 import Account from './pages/account.tsx';
-// import { MContext, MContextWorkorder } from './interface.ts';
+import { MContext } from './interface.ts';
 const BASE = import.meta.env.VITE_PATH;
 
-// const context: MContext = {
-//   appname: 'IT HELPDESK',
-// }
-// export const ThemeContext = createContext<MContext>({});
+const context: MContext = {
+  appname: 'IT HELPDESK',
+  themelight: {
+    bgColor: 'white',
+    textTitleColor: 'text-[#049EF4]',
+    textContentColor: 'text-[#6d6d6d]',
+  }
+}
+export const ThemeContext = createContext<MContext>({});
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    {/* <ThemeContext.Provider value={}> */}
-    <BrowserRouter>
-      <Routes >
-        <Route element={<Layout />}>
-          <Route path={`${BASE}/*`} element={<NotFound />} />
-          <Route path={`${BASE}/workorder`} element={<Workorder />} />
-          <Route path={`${BASE}/sparepart`} element={<Sparepart />} />
-          <Route path={`${BASE}/account`} element={<Account />} />
-        </Route>
-        <Route path={`${BASE}`} element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
-    {/* </ThemeContext.Provider> */}
+    <ThemeContext.Provider value={context}>
+      <BrowserRouter>
+        <Routes >
+          <Route element={<Layout />}>
+            <Route path={`${BASE}/*`} element={<NotFound />} />
+            <Route path={`${BASE}/workorder`} element={<Workorder />} />
+            <Route path={`${BASE}/sparepart`} element={<Sparepart />} />
+            <Route path={`${BASE}/account`} element={<Account />} />
+          </Route>
+          <Route path={`${BASE}`} element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeContext.Provider>
   </React.StrictMode>,
 )
