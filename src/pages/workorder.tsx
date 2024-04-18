@@ -12,14 +12,22 @@ import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { ThemeContext } from '@/main';
 import Loading from '@/components/loading';
-import { API_GET_DICT } from '@/service/workorder.service';
+import { API_GET_DICT_BY_CATEGORY, API_INSERT_JOB } from '@/service/workorder.service';
+import { HelpDeskDict, MInsertJob } from '@/interface/workorder.interface';
 export default function Workorder() {
-    const dictCategory:string = 'WK';
+    const dictCategory: string = 'WK';
+    const [insertJob, setInsertJob] = useState<MInsertJob>({
+        dictCode: '',
+        jobFac: 0,
+        jobLocation: '',
+        jobReqBy: '',
+        jobDesc: ''
+    });
     const context = useContext(ThemeContext);
     const theme = context.themelight;
     const mapStep = 3;
     const [result, setResult] = useState<MResultWorkorder>({});
-    const [locations,setLocations] = useState<MLocation[]>([
+    const [locations, setLocations] = useState<MLocation[]>([
         { dictId: '0', text: 'ออฟฟิศชั้น 2' },
         { dictId: '1', text: 'Main L7' },
         { dictId: '2', text: 'MECHA L7' },
@@ -30,6 +38,7 @@ export default function Workorder() {
     const handleNext = () => {
         setPage((prevPage) => prevPage + 1);
     };
+    const [dictList, setDictList] = useState<HelpDeskDict[]>([]);
     const [step, setStep] = useState<MWorkorderList>({
         label: 'รายการ',
         list: [
@@ -38,15 +47,23 @@ export default function Workorder() {
             { text: 'Kiosk', active: false },
         ]
     });
-    const handleTypeActive = (iActive: number) => {
-        let clone = step;
-        clone.list.map((oStep: MWorkorderItemList, iStep: number) => {
-            oStep.active = iStep == iActive ? true : false;
+    const handleChangeDictActive = (iActive: number, dictCode: string) => {
+        let clone: HelpDeskDict[] = dictList;
+        setInsertJob({ ...insertJob, dictCode: dictCode })
+        clone.map((oStep: HelpDeskDict, iStep: number) => {
+            if (iStep == iActive) {
+                oStep.active = true;
+            } else {
+                oStep.active = false;
+            }
         });
-        setStep({ ...clone })
+        setDictList([...clone])
     }
+    useEffect(() => {
+        console.log(insertJob)
+    }, [insertJob])
     const handleFacActive = (fac: number) => {
-        setResult({ ...result, fac: fac })
+        setInsertJob({ ...insertJob, jobFac: fac });
     }
     const handleLocationActive = (dictId: string) => {
         setResult({ ...result, location: dictId })
@@ -55,18 +72,29 @@ export default function Workorder() {
         setPage((prevPage) => prevPage - 1);
     };
     useEffect(() => {
-        if (theme != undefined && Object.keys(theme).length) {
-            console.log(theme)
+        if ((theme != undefined && Object.keys(theme).length) && (dictList != null && dictList.length)) {
             setLoad(false);
         }
-    }, [theme]);
+    }, [theme, dictList]);
 
-    useEffect(()=>{
+    useEffect(() => {
         init();
-    },[]);
-    async function init(){
-        let dictMenu = await API_GET_DICT(dictCategory);
-        console.log(dictMenu)
+    }, []);
+    async function init() {
+        let dictChoice: HelpDeskDict[] = await API_GET_DICT_BY_CATEGORY({ dictCategory: dictCategory });
+        setDictList(dictChoice);
+    }
+
+
+    async function handleSummit() {
+        if (confirm('คุณต้องการแจ้งซ่อม ใช่หรือไม่ ?')) {
+            let resInsertJob = await API_INSERT_JOB(insertJob);
+            if (resInsertJob.status == true) {
+
+            } else {
+                alert(`ไม่สามารถบันทึกได้ ${context.contact}`)
+            }
+        }
     }
     return (
         <div className='h-[100%] max-w-[400px] flex-grow-1 flex flex-col justify-between'>
@@ -82,12 +110,12 @@ export default function Workorder() {
                         </div> */}
                         <div className='flex flex-col gap-3'>
                             {
-                                page == 0 && step.list.map((o: MWorkorderItemList, i: number) => {
-                                    return <div key={i} className={`transition-all duration-500 flex  pl-3 gap-2 uppercase px-3 py-2 rounded-[12px]  border text-center   ${o.active == true ? 'bg-[#108de7] text-white font-bold' : 'bg-white text-[#092848]'}`} onClick={() => handleTypeActive(i)}>
+                                page == 0 && dictList.map((o: HelpDeskDict, i: number) => {
+                                    return <div key={i} className={`transition-all duration-500 flex  pl-3 gap-2 uppercase px-3 py-2 rounded-[12px]  border text-center   ${o.active == true ? 'bg-[#108de7] text-white font-bold' : 'bg-white text-[#092848]'}`} onClick={() => handleChangeDictActive(i, o.dictCode)}>
                                         {
                                             o.active && <CheckCircleOutlineIcon />
                                         }
-                                        <span>{o.text}</span>
+                                        <span>{o.dictTitle}</span>
                                     </div>
                                 })
                             }
@@ -99,7 +127,7 @@ export default function Workorder() {
                                             {
                                                 [...Array(3)].map((oFac: any, iFac: number) => {
                                                     let fac = (iFac + 1).toLocaleString('en');
-                                                    return <div key={(oFac + '' + iFac)} className={`transition-all text-[18px] duration-500 flex gap-2 uppercase p-3 rounded-full w-16 h-16 justify-center items-center border text-center   ${(result.fac != undefined && result.fac == (iFac + 1)) ? 'bg-[#108de7] text-white font-bold' : 'bg-white text-[#092848]'}`} onClick={() => handleFacActive(Number(fac))}>
+                                                    return <div key={(oFac + '' + iFac)} className={`transition-all text-[18px] duration-500 flex gap-2 uppercase p-3 rounded-full w-16 h-16 justify-center items-center border text-center   ${(insertJob.jobFac != undefined && insertJob.jobFac == (iFac + 1)) ? 'bg-[#108de7] text-white font-bold' : 'bg-white text-[#092848]'}`} onClick={() => handleFacActive(Number(fac))}>
                                                         <span>{fac}</span>
                                                     </div>
                                                 })
@@ -112,7 +140,7 @@ export default function Workorder() {
                                             {
                                                 locations.map((oLocation: MLocation, iLocation: number) => {
                                                     return <Grid item>
-                                                        <div key={iLocation} className={` transition-all  border  duration-500 flex uppercase p-3 rounded-[8px] justify-center items-center  text-center w-fit   ${(result.location != undefined && result.location == oLocation.dictId) ? 'bg-[#108de7] text-white font-bold' : 'bg-white text-[#092848]'}`} onClick={() => handleLocationActive(oLocation.dictId)}>
+                                                        <div key={iLocation} className={` transition-all  border  duration-500 flex uppercase p-3 rounded-[8px] justify-center items-center  text-center w-fit   ${(insertJob.jobLocation != undefined && insertJob.jobLocation == oLocation.dictId) ? 'bg-[#108de7] text-white font-bold' : 'bg-white text-[#092848]'}`} onClick={() => handleLocationActive(oLocation.dictId)}>
                                                             <span className='overflow-hidden truncate '>{oLocation.text}</span>
                                                         </div>
                                                     </Grid>
@@ -126,14 +154,14 @@ export default function Workorder() {
                                 page == 2 && <div className='flex flex-col gap-3'>
                                     <div className=''>
                                         <span>รายละเอียดเพิ่มเติม</span>
-                                        <Textarea placeholder='ระบุหมายเหตุเพิ่มเติมได้ที่นี่ ...'></Textarea>
+                                        <Textarea placeholder='ระบุหมายเหตุเพิ่มเติมได้ที่นี่ ...' onChange={(e: any) => setInsertJob({ ...insertJob, jobDesc: e.target.value })}></Textarea>
                                     </div>
                                     <div className='flex gap-1 flex-col'>
                                         <span>เบอร์ติดต่อ</span>
-                                        <Input type='number' placeholder='ระบุหมายเหตุเพิ่มเติมได้ที่นี่ ...'></Input>
+                                        <Input type='number' placeholder='เบอร์ติดต่อ'></Input>
                                     </div>
                                     <div className='w-full mt-3 flex items-center justify-center'>
-                                        <button className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">ยืนยัน <q>แจ้งซ่อม</q></button>
+                                        <button className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={handleSummit}>ยืนยัน <q>แจ้งซ่อม</q></button>
                                     </div>
                                 </div>
                             }

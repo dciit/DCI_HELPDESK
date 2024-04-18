@@ -1,15 +1,22 @@
-import React, { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Login from './login';
 import Toolbar from '@/components/toolbar';
 import { Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function Layout() {
-    const [login, setLogin] = useState<boolean>(true);
+    const redux = useSelector((state: any) => state.reducer);
+    const [login, setLogin] = useState<boolean>(false);
+    useEffect(() => {
+        if (redux?.login != undefined && typeof redux.login == 'boolean') {
+            setLogin(redux.login)
+        }
+    }, [])
     return (
-        login ?  <div className=' h-[95%]'>
+        true ? <div className=' h-[95%]'>
             <Toolbar />
-            <Outlet/>
-        </div> : <Login/>
+            <Outlet />
+        </div> : <Login />
     )
 }
 

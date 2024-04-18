@@ -5,6 +5,7 @@ export interface MContext {
     result?: MResultWorkorder;
     setResult?: any;
     themelight?: MTheme;
+    contact?:string;
 }
 export interface MTheme {
     bgColor?: string;
