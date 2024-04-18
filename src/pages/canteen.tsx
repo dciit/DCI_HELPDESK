@@ -1,16 +1,16 @@
-import { canteen } from '@/interface/canteen.interface';
+import { canteenMonitor } from '@/interface/canteen.interface';
 import { API_GET_CANTEEN } from '@/service/canteen.service';
 import { CircularProgress } from '@mui/material';
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 
 function Canteen() {
-    const [data, setData] = useState<canteen>();
+    const [data, setData] = useState<canteenMonitor>();
     const [load, setLoad] = useState<boolean>(true);
     useEffect(() => {
         init();
     }, [])
     async function init() {
-        let res: canteen = await API_GET_CANTEEN();
+        let res: canteenMonitor = await API_GET_CANTEEN();
         setData(res);
     }
     useEffect(() => {
@@ -68,14 +68,14 @@ function Canteen() {
                                 <div className=' font-bold flex w-full items-end pr-[5%] gap-3'>
                                     <span className='text-[3em] w-[20%]'>วันที่</span>
                                     <div className=' font-bold w-[60%] text-[4em] text-orange-500 bg-black rounded-sm px-3 num7 text-center'>{
-                                        data?.date
+                                        data?.serveDate
                                     }</div>
                                 </div>
                                 <div className=' font-bold flex w-full items-end pr-[5%] gap-3'>
                                     <span className='text-[3em] w-[20%]'>เวลา</span>
                                     <div className=' font-bold w-[60%] text-[4em] text-lime-500 bg-black rounded-sm px-3 num7 text-center'>
                                         {
-                                            data?.time
+                                            data?.serveTime
                                         }
                                     </div>
                                 </div>
@@ -83,7 +83,7 @@ function Canteen() {
                                     <span className='text-[3em] w-[20%]'>กะ</span>
                                     <div className=' font-bold w-[60%] text-[5em] text-red-500 bg-black rounded-sm px-3  text-center'>
                                         {
-                                            data?.shift
+                                            data?.serveShift
                                         }
                                     </div>
                                 </div>
@@ -93,7 +93,7 @@ function Canteen() {
                                     <span className='text-[3em]'>จำนวนพนักงาน</span>
                                     <div className='bg-black rounded-sm px-3 text-[5em] num7 text-lime-500 text-right'>
                                         {
-                                            data?.amount
+                                            data?.totalEmployee
                                         }
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@ function Canteen() {
                                     <span className='text-[3em]'>ยอดการทานข้าว</span>
                                     <div className='bg-black rounded-sm px-3 text-[5em] num7 text-red-600 text-right'>
                                         {
-                                            data?.qty.reduce((a: number, b: number) => {
+                                            data?.totalServe.reduce((a: number, b: number) => {
                                                 return a + b
                                             }, 0)
                                         }
