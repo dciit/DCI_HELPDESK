@@ -15,6 +15,7 @@ import NotFound from './pages/notfound.tsx';
 import Layout from './pages/layout.tsx';
 import Account from './pages/account.tsx';
 import { MContext } from './interface.ts';
+import Canteen from './pages/canteen.tsx';
 const BASE = import.meta.env.VITE_PATH;
 
 const context: MContext = {
@@ -36,8 +37,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <Route path={`${BASE}/workorder`} element={<Workorder />} />
             <Route path={`${BASE}/sparepart`} element={<Sparepart />} />
             <Route path={`${BASE}/account`} element={<Account />} />
+
           </Route>
           <Route path={`${BASE}`} element={<NotFound />} />
+          <Route path={`${BASE}/canteen`} element={<Canteen />} />
         </Routes>
       </BrowserRouter>
     </ThemeContext.Provider>

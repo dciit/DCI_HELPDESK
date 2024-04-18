@@ -12,8 +12,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { ThemeContext } from '@/main';
 import Loading from '@/components/loading';
+import { API_GET_DICT } from '@/service/workorder.service';
 export default function Workorder() {
-    // const appname = import.meta.env.VITE_APPNAME;
+    const dictCategory:string = 'WK';
     const context = useContext(ThemeContext);
     const theme = context.themelight;
     const mapStep = 3;
@@ -59,6 +60,14 @@ export default function Workorder() {
             setLoad(false);
         }
     }, [theme]);
+
+    useEffect(()=>{
+        init();
+    },[]);
+    async function init(){
+        let dictMenu = await API_GET_DICT(dictCategory);
+        console.log(dictMenu)
+    }
     return (
         <div className='h-[100%] max-w-[400px] flex-grow-1 flex flex-col justify-between'>
             {

@@ -1,3 +1,4 @@
+import { canteenMonitor } from '@/interface/canteen.interface';
 import axios from 'axios'
 const http = axios.create({
     baseURL: import.meta.env.VITE_WK,
@@ -8,10 +9,10 @@ const http = axios.create({
 });
 export default http;
 
-export function API_GET_DICT(hdCategory: string) {
-    return new Promise(resolve => {
-        http.get(`/getDict/${hdCategory}`).then((res) => {
-            resolve(res);
+export function API_GET_CANTEEN() {
+    return new Promise<canteenMonitor>(resolve => {
+        http.get(`/getDataCanteen`).then((res) => {
+            resolve(res.data);
         })
     })
 }

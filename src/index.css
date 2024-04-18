@@ -75,6 +75,18 @@
     @apply bg-background text-foreground;
   }
 }
-html,body,#root {
+
+html,
+body,
+#root {
   height: 100%;
+}
+
+@font-face {
+  font-family: '7';
+  src: local('7'), url(./assets/fonts/7.ttf) format('woff');
+}
+
+.canteen-page .num7 {
+  font-family: '7';
 }
