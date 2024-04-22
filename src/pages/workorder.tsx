@@ -3,10 +3,10 @@ import MobileStepper from '@mui/material/MobileStepper';
 import MuiButton from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import { Suspense, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import '../css/workorder.css'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import { MLocation, MResultWorkorder, MTheme, MWorkorderItemList, MWorkorderList } from '@/interface';
+import { MLocation, MResultWorkorder, MWorkorderList } from '@/interface';
 import { Grid } from '@mui/material';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
@@ -27,6 +27,7 @@ export default function Workorder() {
     const theme = context.themelight;
     const mapStep = 3;
     const [result, setResult] = useState<MResultWorkorder>({});
+    // @ts-ignore
     const [locations, setLocations] = useState<MLocation[]>([
         { dictId: '0', text: 'ออฟฟิศชั้น 2' },
         { dictId: '1', text: 'Main L7' },
@@ -39,6 +40,7 @@ export default function Workorder() {
         setPage((prevPage) => prevPage + 1);
     };
     const [dictList, setDictList] = useState<HelpDeskDict[]>([]);
+    // @ts-ignore
     const [step, setStep] = useState<MWorkorderList>({
         label: 'รายการ',
         list: [

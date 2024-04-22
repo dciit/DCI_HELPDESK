@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 
 function Layout() {
     const redux = useSelector((state: any) => state.reducer);
+    // @ts-ignore
     const [login, setLogin] = useState<boolean>(false);
     useEffect(() => {
         if (redux?.login != undefined && typeof redux.login == 'boolean') {

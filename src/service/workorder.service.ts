@@ -1,4 +1,4 @@
-import { HelpDeskDict, MGetDict, MInsertJob, MStatus } from '@/interface/workorder.interface';
+import { HelpDeskDict, MGetDict, MStatus } from '@/interface/workorder.interface';
 import axios from 'axios'
 const http = axios.create({
     baseURL: 'http://localhost:5022',

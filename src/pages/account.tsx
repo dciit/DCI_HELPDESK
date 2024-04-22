@@ -6,13 +6,17 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import { useEffect, useState } from 'react';
 import '../css/workorder.css'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+// @ts-ignore
 import { MLocation, MResultWorkorder, MWorkorderItemList, MWorkorderList } from '@/interface';
+// @ts-ignore
 import { Grid } from '@mui/material';
 import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import alpha from '../assets/Alpha.png'
+
 export default function account() {
     const mapStep = 2;
+    // @ts-ignore
     const [result, setResult] = useState<MResultWorkorder>({});
     const [page, setPage] = useState<number>(0);
     const theme = useTheme();
@@ -24,7 +28,7 @@ export default function account() {
         list: [
             { text: 'ALPHA SYSTEM', active: true },
             { text: 'On-line Request Forms', active: false },
-            { text: 'WMS (FG Warehouse)', active: false },
+            // { text: 'WMS (FG Warehouse)', active: false },
             // { text: 'DCI-ALPHA WEB', active: false },
             //{ text: 'Andon Board', active: false },
             // { text: 'Backflush System', active: false },
@@ -53,19 +57,35 @@ export default function account() {
         <div className='h-[100%] max-w-[400px] flex-grow-1 flex flex-col justify-between'>
             <div className='p-6'>
                 <div className='flex flex-col mb-4'>
-                    <span className='text-[#084b83] font-semibold text-[20px]'>แจ้งปัญหาเกี่ยวกับระบบ</span>
-                    <span>เลือก <span className='text-red-500'>"รายการ"</span></span>
+                    <span className='text-[#f5559a] font-semibold text-[20px]'>แจ้งปัญหาเกี่ยวกับระบบ</span>
                 </div>
                 <div className='flex flex-col gap-3'>
                     {
-                        page == 0 && step.list.map((o: MWorkorderItemList, i: number) => {
-                            return <div key={i} className={`transition-all duration-500 flex  pl-3 gap-2 uppercase px-3 py-2 rounded-[12px]  border text-center   ${o.active == true ? 'bg-[#108de7] text-white font-bold' : 'bg-white text-[#092848]'}`} onClick={() => handleTypeActive(i)}>
-                                {
-                                    o.active && <CheckCircleOutlineIcon />
-                                }
-                                <span>{o.text}</span>
-                            </div>
-                        })
+                        page == 0 && <>
+                            <span className='text-[16px]'>กรุณาเลือก<span className='text-red-500 '>  "รายการ"</span></span>
+                            {
+                                step.list.map((o: MWorkorderItemList, i: number) => {
+                                    if (o.text == "ALPHA SYSTEM") {
+                                        return <div key={i} className={`transition-all duration-500 flex  pl-3 gap-2 uppercase px-3 py-2 rounded-[12px]  border text-center   ${o.active == true ? 'bg-[#108de7] text-white font-bold' : 'bg-white text-[#092848]'}`} onClick={() => handleTypeActive(i)}>
+                                            {
+                                                o.active && <CheckCircleOutlineIcon />
+                                            }
+                                            <span>{o.text}</span>
+                                            <img className='size-7 relative left-20' src={alpha} alt="alpha" />
+                                        </div>
+                                    }
+                                    else {
+                                        return <div key={i} className={`transition-all duration-500 flex  pl-3 gap-2 uppercase px-3 py-2 rounded-[12px]  border text-center   ${o.active == true ? 'bg-[#108de7] text-white font-bold' : 'bg-white text-[#092848]'}`} onClick={() => handleTypeActive(i)}>
+                                            {
+                                                o.active && <CheckCircleOutlineIcon />
+                                            }
+                                            <span>{o.text}</span>
+                                            {/* <img className='size-7' src={pichon} alt="pichon" /> */}
+                                        </div>
+                                    }
+                                })
+                            }
+                        </>
                     }
                     {
                         page == 1 && <div className='flex flex-col gap-3'>

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function Login() {
   const redux = useSelector((state: any) => state.reducer);
+  // @ts-ignore
   const login = redux.login;
   const dispatch = useDispatch();
   const [code, setCode] = useState<string>('');
