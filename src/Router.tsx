@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux'
 import { MRedux } from './interface/core.interface'
 import Layout from './pages/layout'
 import Helpdesk from './pages/helpdesk'
+import LoginTest from './pages/login.testing'
 const BASE = import.meta.env.VITE_PATH;
 
 const Routers = () => {
@@ -29,7 +30,7 @@ const Routers = () => {
                     <Route path={`${BASE}/account`} element={<Account />} />
                 </Route>
                 <Route path={`${BASE}`} element={<NotFound />} />
-                <Route path={`${BASE}/login`} element={<Login />} />
+                <Route path={`${BASE}/login`} element={<LoginTest />} />
                 <Route path={`${BASE}/canteen`} element={<Canteen />} />
                 <Route path={`${BASE}/helpdesk`} element ={ <Helpdesk/>}/>
             </Routes>

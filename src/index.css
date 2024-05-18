@@ -87,6 +87,14 @@ body,
   src: local('7'), url(./assets/fonts/7.ttf) format('woff');
 }
 
+@font-face {
+  font-family: 'Inter';
+  src: local('Inter'), url(./assets/fonts/Inter.ttf) format('woff');
+}
+#helpdesk * ,
+#login *{
+  font-family: 'Inter';
+}
 .canteen-page .num7 {
   font-family: '7';
 }

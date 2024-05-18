@@ -4,3 +4,10 @@ export interface MRedux {
     sure?: string;
     code?: string;
 }
+export interface MLogout {
+    open: boolean;
+    close: any;
+}
+export interface MReduxCore {
+    login: boolean;
+}
