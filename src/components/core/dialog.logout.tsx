@@ -2,12 +2,12 @@ import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
-import { MLogout } from '@/interface/core.interface'
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { base } from '@/constant'
+import { base } from '../../constant'
+import { MLogout } from '../../interface/core.interface';
 function DialogLogout(props: MLogout) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -17,7 +17,7 @@ function DialogLogout(props: MLogout) {
         if (open) {
 
         }
-        if(redx.login == false){
+        if(typeof redx.login != 'undefined' && redx.login == false){
             navigate(`../${base}/login`);
         }   
     }, [open,redx]);
