@@ -12,8 +12,8 @@ import { MRedux } from './interface/core.interface'
 import Layout from './pages/layout'
 import Helpdesk from './pages/helpdesk'
 import LoginTest from './pages/login.testing'
-import HelpdeskBackend from './pages/้helpdesk.backend'
-import Management from './pages/้helpdesk.backend'
+import HelpdeskBackend from './pages/helpdesk.backend'
+import Management from './pages/helpdesk.backend'
 const BASE = import.meta.env.VITE_PATH;
 
 const Routers = () => {
