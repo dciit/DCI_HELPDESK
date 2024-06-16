@@ -92,7 +92,8 @@ body,
   src: local('Inter'), url(./assets/fonts/Inter.ttf) format('woff');
 }
 #helpdesk * ,
-#login *{
+#login *,
+#toolbar *{
   font-family: 'Inter';
 }
 .canteen-page .num7 {
