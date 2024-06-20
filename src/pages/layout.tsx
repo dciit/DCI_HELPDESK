@@ -14,9 +14,11 @@ function Layout() {
         }
     }, [])
     return (
-        true ? <div className=' h-[95%]'>
+        true ? <div className=' flex  flex-col h-[100%]'>
             <Toolbar />
-            <Outlet />
+            <div className='grow'>
+                <Outlet />
+            </div>
         </div> : <Login />
     )
 }
